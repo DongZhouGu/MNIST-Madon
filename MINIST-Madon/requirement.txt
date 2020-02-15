@@ -1,0 +1,5 @@
+torch==1.1.0
+torchnet==0.0.4
+torchvision==0.3.0
+visdom==0.1.8.8
+
