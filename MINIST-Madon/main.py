@@ -52,7 +52,7 @@ def test(args, model, device, test_loader):
             correct += pred.eq(target.view_as(pred)).sum().item()  # 统计预测正确个数
 
     test_loss /= len(test_loader.dataset)
-    test_acc_meter = test_loss
+    test_acc_meter.add(100. * correct / len(test_loader.dataset))
     print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(
         test_loss, correct, len(test_loader.dataset),
         100. * correct / len(test_loader.dataset)))
@@ -96,7 +96,7 @@ def main():
         train(args, model, device, train_loader, optimizer, epoch)
         test(args, model, device, test_loader)
         vis.plot({'train_loss': train_loss_meter.value()[0]})
-        vis.plot({'test_loss': test_acc_meter.value()[0]})  # 为了可视化增加的内容
+        vis.plot({'test_acc': test_acc_meter.value()[0]})  # 为了可视化增加的内容
 
 if __name__ == '__main__':
     main()
